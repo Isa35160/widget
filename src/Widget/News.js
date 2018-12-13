@@ -23,7 +23,7 @@ class News extends Component {
     loadData(){
         const { articles, ids } = this.state;
         const { refreshInterval } = this.props;
-        const { ApiKey, Category } = this.props;
+        const { ApiKey, Category, Background, CardBorder } = this.props;
 
 
         fetch('https://newsapi.org/v2/top-headlines?country=fr&category='+Category+'&apiKey='+ApiKey)
@@ -56,6 +56,9 @@ class News extends Component {
                 }, refreshInterval || this.props.Interval);
             })
     }
+    Capitalize(str){
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
 
     render() {
 
@@ -69,16 +72,21 @@ class News extends Component {
             publishedAt = publishedAt.getDate() + "/" + (publishedAt.getMonth() + 1) + "/" + publishedAt.getFullYear();
         }
         const { ApiKey, Category } = this.props;
+        // const img = if(articles[currentArticle].urlToImage){
+        //     return <img className={"Img"} src={articles[currentArticle].urlToImage} alt={articles[currentArticle].title}/>
+        // }else{
+        //     return <img className={"Img"} src="logo-Digital-CAMPUS.png" alt={articles[currentArticle].title}/>
+        // };
         return (
             <React.Fragment>
                 <div className={"MyWidget"}>
-                    <h2 className="text-center">Keloù {Category}</h2>
-                    <div className="card">
-                        <img className={"Img"} src={articles[currentArticle].urlToImage} alt={articles[currentArticle].title}/>
+                    <h2 style={{backgroundColor: this.props.Background}} className="text-center">Keloù {this.Capitalize(Category)}</h2>
+                    <div style={{border: this.props.CardBorder}} className="card">
+                        <img className="Img" src={articles[currentArticle].urlToImage} onError={(e)=>{e.target.onerror = null; e.target.src="logo-Digital-CAMPUS.png"}}/>
                             <div className="card-body">
                                 <h5 className="card_title">{ articles[currentArticle].title }</h5>
                                 {/*<p className="card-text">{ articles[currentArticle].description }</p>*/}
-                                <h6 className={"Date"}>{ articles[currentArticle].source.name } - { publishedAt ? publishedAt : null }</h6>
+                                <div className="Date"><h6 className={""}>{ articles[currentArticle].source.name } - { publishedAt ? publishedAt : null }</h6></div>
                             </div>
                     </div>
                 </div>
