@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import placeholder from './logo-Digital-CAMPUS.png';
 
 class News extends Component {
 
@@ -72,18 +73,19 @@ class News extends Component {
             publishedAt = publishedAt.getDate() + "/" + (publishedAt.getMonth() + 1) + "/" + publishedAt.getFullYear();
         }
         const { ApiKey, Category } = this.props;
-        // const img = if(articles[currentArticle].urlToImage){
-        //     return <img className={"Img"} src={articles[currentArticle].urlToImage} alt={articles[currentArticle].title}/>
-        // }else{
-        //     return <img className={"Img"} src="logo-Digital-CAMPUS.png" alt={articles[currentArticle].title}/>
-        // };
+
+        const img = (articles[currentArticle].urlToImage)
+            ? <img className={"Img"} src={articles[currentArticle].urlToImage} alt={articles[currentArticle].title}/>
+            : <img className={"Img"} src={placeholder} alt={articles[currentArticle].title}/>
+        ;
+
         return (
             <React.Fragment>
                 <div className={"MyWidget"}>
                     <h2 style={{backgroundColor: this.props.Background}} className="text-center">Keloù {this.Capitalize(Category)}</h2>
                     <div style={{border: this.props.CardBorder}} className="card">
-                        <img className="Img" src={articles[currentArticle].urlToImage} onError={(e)=>{e.target.onerror = null; e.target.src="logo-Digital-CAMPUS.png"}}/>
-                            <div className="card-body">
+                        {img}
+                        <div className="card-body">
                                 <h5 className="card_title">{ articles[currentArticle].title }</h5>
                                 {/*<p className="card-text">{ articles[currentArticle].description }</p>*/}
                                 <div className="Date"><h6 className={""}>{ articles[currentArticle].source.name } - { publishedAt ? publishedAt : null }</h6></div>
