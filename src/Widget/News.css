@@ -1,0 +1,31 @@
+.MyWidget {
+    border-radius: 20px;
+    height: 100%;
+    max-width:50vh;
+}
+
+.card{
+    border: 3px solid #0e2f4f;
+    border-top: 0;
+    border-radius: 0 0 20px 20px;
+}
+
+
+.MyWidget h2{
+    background-color: #0e2f4f;
+    border-radius: 20px 20px 0 0;
+    color: #fff;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.Article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Img{
+    max-height: 100%;
+    max-width:100%;
+}
